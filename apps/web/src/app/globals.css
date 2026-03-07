@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--erz-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--erz-color-background);
+  color: var(--erz-color-text);
+}
+
+a {
+  color: var(--erz-color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: var(--erz-color-link);
+  color: var(--erz-color-on-primary);
+  border: none;
+  border-radius: var(--erz-radius-sm);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: var(--erz-color-link-hover);
+}
+
+button:disabled {
+  background-color: var(--erz-color-border);
+  cursor: not-allowed;
+}
+
+input,
+select {
+  padding: 0.5rem;
+  border: 1px solid var(--erz-color-border);
+  border-radius: var(--erz-radius-sm);
+  font-size: 1rem;
+  background-color: var(--erz-color-white);
+  color: var(--erz-color-text);
+  font-family: inherit;
+}
+
+input::placeholder {
+  color: var(--erz-color-text-light);
+}
+
+/* Style date input icons and select arrows for dark themes */
+input::-webkit-calendar-picker-indicator {
+  filter: var(--erz-picker-filter, none);
+}
+
+:root,
+[data-theme="warm-literary"],
+[data-theme="earth-tones"] {
+  --erz-picker-filter: none;
+}
+
+[data-theme="ink-paper"],
+[data-theme="dark-moody"] {
+  --erz-picker-filter: invert(1);
+  color-scheme: dark;
+}

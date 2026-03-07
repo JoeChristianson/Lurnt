@@ -1,0 +1,28 @@
+{
+  "name": "lurnt-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --filter=@lurnt/web",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
+    "type-check": "turbo run type-check",
+    "db:up": "docker-compose up -d",
+    "db:make-migrations": "pnpm --filter=@lurnt/database db:make-migrations",
+    "db:migrate": "pnpm --filter=@lurnt/database db:migrate",
+    "db:studio": "pnpm --filter=@lurnt/database db:studio",
+    "db:seed": "pnpm --filter=@lurnt/web db:seed",
+    "test": "pnpm --filter @lurnt/domain-services test",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

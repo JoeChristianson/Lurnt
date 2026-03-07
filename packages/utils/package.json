@@ -1,0 +1,24 @@
+{
+  "name": "@lurnt/utils",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo node_modules"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3"
+  },
+  "devDependencies": {
+    "@lurnt/typescript-config": "workspace:*",
+    "@types/bcryptjs": "^2.4.6",
+    "typescript": "^5.7.2",
+    "eslint": "^8.45.0",
+    "@types/node": "^20.4.2"
+  }
+}

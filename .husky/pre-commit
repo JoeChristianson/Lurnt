@@ -1,0 +1,1 @@
+pnpm turbo run build --filter='!@erz/qa' && pnpm turbo run type-check --filter='!@erz/qa' && pnpm test

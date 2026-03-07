@@ -1,0 +1,33 @@
+{
+  "name": "@lurnt/api",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo node_modules"
+  },
+  "dependencies": {
+    "@lurnt/data-access": "workspace:*",
+    "@lurnt/database": "workspace:*",
+    "@lurnt/domain": "workspace:*",
+    "@lurnt/domain-services": "workspace:*",
+    "@lurnt/email": "workspace:*",
+    "@lurnt/utils": "workspace:*",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "@trpc/server": "^11.0.0",
+    "drizzle-orm": "^0.38.3",
+    "google-auth-library": "^10.5.0",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@lurnt/typescript-config": "workspace:*",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.2"
+  }
+}

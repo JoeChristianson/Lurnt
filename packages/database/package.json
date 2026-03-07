@@ -1,0 +1,32 @@
+{
+  "name": "@lurnt/database",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "with-env": "dotenv -e ../../.env --",
+    "dev": "pnpm with-env drizzle-kit studio",
+    "build": "tsc",
+    "db:make-migrations": "pnpm with-env drizzle-kit generate",
+    "db:migrate": "pnpm with-env tsx src/migrate.ts",
+    "db:push": "pnpm with-env drizzle-kit push",
+    "db:studio": "pnpm with-env drizzle-kit studio",
+    "clean": "rm -rf .turbo node_modules dist"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
+    "@lurnt/domain": "workspace:*",
+    "drizzle-orm": "^0.38.3",
+    "mysql2": "^3.11.5"
+  },
+  "devDependencies": {
+    "@lurnt/typescript-config": "workspace:*",
+    "@types/node": "^20.19.28",
+    "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
+    "drizzle-kit": "^0.30.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

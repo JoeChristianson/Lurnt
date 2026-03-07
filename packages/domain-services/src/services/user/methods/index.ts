@@ -1,0 +1,9 @@
+export { verifyEmail } from "./verifyEmail";
+export { sendVerificationEmail } from "./sendVerificationEmail";
+export { resendVerification } from "./resendVerification";
+export { getProfile } from "./getProfile";
+export { updateProfile } from "./updateProfile";
+export { planter } from "./planter";
+export { updateTheme } from "./updateTheme";
+export { loginWithGoogle } from "./loginWithGoogle";
+export { setHandle } from "./setHandle";

@@ -1,0 +1,40 @@
+{
+  "name": "@lurnt/web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next node_modules",
+    "db:seed": "tsx src/lib/seed.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "@lurnt/api": "workspace:*",
+    "@lurnt/database": "workspace:*",
+    "@lurnt/domain": "workspace:*",
+    "@lurnt/domain-services": "workspace:*",
+    "@lurnt/ui": "workspace:*",
+    "@lurnt/utils": "workspace:*",
+    "@react-oauth/google": "^0.13.4",
+    "@tanstack/react-query": "^5.62.12",
+    "@trpc/client": "^11.0.0-rc.669",
+    "@trpc/react-query": "^11.0.0-rc.669",
+    "@trpc/server": "^11.0.0",
+    "next": "^15.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.11"
+  },
+  "devDependencies": {
+    "@lurnt/typescript-config": "workspace:*",
+    "@types/node": "^22.10.5",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

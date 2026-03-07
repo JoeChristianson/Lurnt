@@ -1,0 +1,26 @@
+{
+  "name": "@lurnt/data-access",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo node_modules"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
+    "@lurnt/database": "workspace:*",
+    "@lurnt/domain": "workspace:*",
+    "@lurnt/utils": "workspace:*",
+    "drizzle-orm": "^0.38.3"
+  },
+  "devDependencies": {
+    "@lurnt/typescript-config": "workspace:*",
+    "typescript": "^5.7.2",
+    "@types/node": "^20.4.2"
+  }
+}

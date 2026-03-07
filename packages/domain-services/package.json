@@ -1,0 +1,29 @@
+{
+  "name": "@lurnt/domain-services",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo node_modules"
+  },
+  "dependencies": {
+    "@lurnt/data-access": "workspace:*",
+    "@lurnt/database": "workspace:*",
+    "@lurnt/domain": "workspace:*",
+    "@lurnt/email": "workspace:*",
+    "@lurnt/utils": "workspace:*",
+    "@paralleldrive/cuid2": "^2.2.2"
+  },
+  "devDependencies": {
+    "@lurnt/typescript-config": "workspace:*",
+    "@types/node": "^20.4.2",
+    "typescript": "^5.7.2",
+    "vitest": "^4.0.18"
+  }
+}

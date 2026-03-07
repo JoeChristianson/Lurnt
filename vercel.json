@@ -1,0 +1,5 @@
+{
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm turbo run build --filter=@lurnt/web && pnpm db:migrate",
+  "outputDirectory": "apps/web/.next"
+}
