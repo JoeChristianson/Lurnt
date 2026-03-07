@@ -22,10 +22,10 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: pnpm turbo run build --filter='!@lurnt/qa'
+        run: pnpm turbo run build
 
       - name: Type-check
-        run: pnpm turbo run type-check --filter='!@lurnt/qa'
+        run: pnpm turbo run type-check
 
       - name: Test
         run: pnpm test
