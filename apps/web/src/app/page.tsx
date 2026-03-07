@@ -23,15 +23,7 @@ export default function HomePage() {
           </Text>
           <Stack direction="row" gap="0.75rem" align="center">
             <ThemeToggler />
-            {isAuthenticated ? (
-              <Button
-                variant="primary"
-                size="sm"
-                onClick={() => router.push("/items")}
-              >
-                My Items
-              </Button>
-            ) : (
+            {!isAuthenticated && (
               <Button
                 variant="primary"
                 size="sm"
@@ -44,8 +36,7 @@ export default function HomePage() {
         </Stack>
 
         <Text>
-          Welcome to Lurnt. This is a full-stack monorepo with
-          authentication, a sample CRUD entity, and a layered architecture.
+          Welcome to Lurnt. Your guided path to expertise.
         </Text>
 
         {!isAuthenticated && (
