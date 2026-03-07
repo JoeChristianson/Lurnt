@@ -65,7 +65,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const value: AuthContextType = {
     token,
-    user: user || null,
+    user: (user as User | undefined) ?? null,
     isAuthenticated: Boolean(token) && Boolean(user),
     isEmailVerified: Boolean(user?.emailVerified),
     isLoading: Boolean(token) && isLoading,
