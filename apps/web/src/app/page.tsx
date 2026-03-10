@@ -1,13 +1,26 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button, ContentContainer, Stack, Text } from "@lurnt/ui";
 import { useAuth } from "@/contexts/AuthContext";
 import { ThemeToggler } from "@/components/ThemeToggler";
+import { trpc } from "@/lib/trpc/client";
 
 export default function HomePage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const router = useRouter();
+
+  const { data: expertiseStatus } = trpc.expertise.hasActive.useQuery(
+    undefined,
+    { enabled: isAuthenticated },
+  );
+
+  useEffect(() => {
+    if (isAuthenticated && !authLoading && expertiseStatus && !expertiseStatus.hasActive) {
+      router.push("/choose-expertise");
+    }
+  }, [isAuthenticated, authLoading, expertiseStatus, router]);
 
   return (
     <ContentContainer style={{ padding: "2rem 1rem" }}>

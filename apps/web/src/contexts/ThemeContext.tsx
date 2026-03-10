@@ -31,11 +31,14 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
 
-  const [themeId, setThemeIdState] = useState<ThemeId>(() => {
-    if (typeof window === "undefined") return DEFAULT_THEME;
+  const [themeId, setThemeIdState] = useState<ThemeId>(DEFAULT_THEME);
+
+  useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
-    return isValidTheme(stored) ? stored : DEFAULT_THEME;
-  });
+    if (isValidTheme(stored)) {
+      setThemeIdState(stored);
+    }
+  }, []);
 
   useEffect(() => {
     if (user?.theme && isValidTheme(user.theme)) {

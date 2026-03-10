@@ -23,7 +23,7 @@ export default function RegisterPage() {
     onSuccess: (data) => {
       login(data.token);
       toast.success("Account created!");
-      router.push("/");
+      router.push("/choose-expertise");
     },
   });
 
