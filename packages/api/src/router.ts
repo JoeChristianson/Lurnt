@@ -1,9 +1,11 @@
 import { router, publicProcedure } from "./server";
 import { userRouter } from "./routers/user";
+import { expertiseRouter } from "./routers/expertise";
 import { getDb } from "@lurnt/database";
 
 export const appRouter = router({
   user: userRouter,
+  expertise: expertiseRouter,
   ping: publicProcedure.query(async () => {
     try {
       await getDb();

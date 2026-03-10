@@ -139,10 +139,7 @@ export const userRouter = router({
     .input(z.object({ token: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
       try {
-        return await UserService.verifyEmail.execute(
-          toUnauthedCtx(ctx),
-          input,
-        );
+        return await UserService.verifyEmail.execute(toUnauthedCtx(ctx), input);
       } catch {
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -228,13 +225,21 @@ export const userRouter = router({
   loginWithGoogle: publicProcedure
     .input(z.object({ credential: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
-      const { verifyGoogleToken } = await import("../google");
-      const payload = await verifyGoogleToken(input.credential);
+      try {
+        const { verifyGoogleToken } = await import("../google");
+        const payload = await verifyGoogleToken(input.credential);
 
-      return UserService.loginWithGoogle.execute(toUnauthedCtx(ctx), {
-        payload,
-        generateToken,
-      });
+        return UserService.loginWithGoogle.execute(toUnauthedCtx(ctx), {
+          payload,
+          generateToken,
+        });
+      } catch (error) {
+        console.error("Google login error:", error);
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Google authentication failed",
+        });
+      }
     }),
 
   setHandle: partialProtectedProcedure
