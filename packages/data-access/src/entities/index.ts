@@ -3,3 +3,8 @@ export * from "./expertise";
 export * from "./userExpertise";
 export * from "./knowledgeGraph";
 export * from "./expertiseAssessmentResult";
+export * from "./node";
+export * from "./edge";
+export * from "./expertiseNode";
+export * from "./knowledgeGraphNode";
+export * from "./knowledgeGraphEdge";

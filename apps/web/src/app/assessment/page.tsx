@@ -45,9 +45,18 @@ function AssessmentContent() {
     },
   });
 
-  const completeMutation = trpc.assessment.completeIntake.useMutation({
+  const generateGraphMutation = trpc.knowledgeGraph.generate.useMutation({
     onSuccess: () => {
-      router.push("/");
+      router.push(`/graph?ue=${userExpertiseId}`);
+    },
+  });
+
+  const completeMutation = trpc.assessment.completeIntake.useMutation({
+    onSuccess: (data) => {
+      generateGraphMutation.mutate({
+        userExpertiseId: userExpertiseId!,
+        summary: data.summary,
+      });
     },
   });
 
@@ -150,11 +159,13 @@ function AssessmentContent() {
       {/* Error display */}
       {(startMutation.error ||
         sendMutation.error ||
-        completeMutation.error) && (
+        completeMutation.error ||
+        generateGraphMutation.error) && (
         <Banner variant="danger" style={{ marginBottom: "0.5rem" }}>
           {startMutation.error?.message ||
             sendMutation.error?.message ||
-            completeMutation.error?.message}
+            completeMutation.error?.message ||
+            generateGraphMutation.error?.message}
         </Banner>
       )}
 
@@ -184,11 +195,15 @@ function AssessmentContent() {
           ) : (
             <Button
               onClick={handleComplete}
-              disabled={completeMutation.isPending}
+              disabled={completeMutation.isPending || generateGraphMutation.isPending}
               variant="success"
               size="md"
             >
-              {completeMutation.isPending ? "Finishing..." : "Finish"}
+              {completeMutation.isPending
+                ? "Analyzing..."
+                : generateGraphMutation.isPending
+                  ? "Building graph..."
+                  : "Finish"}
             </Button>
           )}
         </Stack>
@@ -200,11 +215,13 @@ function AssessmentContent() {
           <Stack gap="0.5rem">
             <Text style={{ fontWeight: 600 }}>Assessment Complete</Text>
             <Text style={{ color: theme.colors.textMuted }}>
-              Your intake conversation has been analyzed. Your learning path is
-              being prepared.
+              Your intake conversation has been analyzed.
             </Text>
-            <Button onClick={() => router.push("/")} size="md">
-              Go to Dashboard
+            <Button
+              onClick={() => router.push(`/graph?ue=${userExpertiseId}`)}
+              size="md"
+            >
+              View Learning Path
             </Button>
           </Stack>
         </Card>
