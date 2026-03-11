@@ -19,6 +19,11 @@ export * from "./components/Input";
 export * from "./components/Textarea";
 export * from "./components/Select";
 
+// Chat components
+export * from "./components/ChatMessage";
+export * from "./components/ChatInput";
+export * from "./components/TypingIndicator";
+
 // Feedback components
 export * from "./components/Badge";
 export * from "./components/Banner";
