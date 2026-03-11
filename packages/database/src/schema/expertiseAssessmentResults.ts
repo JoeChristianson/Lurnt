@@ -4,12 +4,13 @@ import {
   json,
   boolean,
   foreignKey,
+  mysqlEnum,
 } from "drizzle-orm/mysql-core";
 import { genericColumns } from "./genericColumns";
 import { expertiseAssessments } from "./expertiseAssessments";
 import { userExpertises } from "./userExpertises";
 import { users } from "./users";
-import type { AssessmentMessage } from "@lurnt/domain";
+import type { AssessmentMessage, IntakeSummary } from "@lurnt/domain";
 
 export const expertiseAssessmentResults = mysqlTable(
   "ExpertiseAssessmentResult",
@@ -17,7 +18,7 @@ export const expertiseAssessmentResults = mysqlTable(
     ...genericColumns,
     expertiseAssessmentId: varchar("expertiseAssessmentId", {
       length: 128,
-    }).notNull(),
+    }),
     userExpertiseId: varchar("userExpertiseId", { length: 128 })
       .notNull()
       .references(() => userExpertises.id),
@@ -27,7 +28,11 @@ export const expertiseAssessmentResults = mysqlTable(
     conversation: json("conversation")
       .$type<AssessmentMessage[]>()
       .notNull(),
-    passed: boolean("passed").notNull(),
+    passed: boolean("passed").notNull().default(false),
+    status: mysqlEnum("status", ["in_progress", "completed"])
+      .notNull()
+      .default("in_progress"),
+    summary: json("summary").$type<IntakeSummary>(),
   },
   (table) => [
     foreignKey({

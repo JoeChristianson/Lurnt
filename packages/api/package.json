@@ -11,6 +11,7 @@
     "clean": "rm -rf dist .turbo node_modules"
   },
   "dependencies": {
+    "@lurnt/ai": "workspace:*",
     "@lurnt/data-access": "workspace:*",
     "@lurnt/database": "workspace:*",
     "@lurnt/domain": "workspace:*",
