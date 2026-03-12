@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useMemo, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { trpc } from "@/lib/trpc/client";
 import {
   ReactFlow,
@@ -96,8 +96,6 @@ function layoutNodes(
   const xSpacing = 280;
   const ySpacing = 120;
 
-  const nodeMap = new Map(graphNodes.map((n) => [n.nodeId, n]));
-
   return graphNodes.map((gn) => {
     const depth = depths.get(gn.nodeId) ?? 0;
     const levelNodes = levels.get(depth) ?? [];
@@ -160,6 +158,7 @@ function buildFlowEdges(
 }
 
 interface SelectedNodeInfo {
+  kgNodeId: string;
   title: string;
   description: string | null;
   status: string;
@@ -167,6 +166,7 @@ interface SelectedNodeInfo {
 
 function GraphContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const userExpertiseId = searchParams.get("ue");
   const [selectedNode, setSelectedNode] = useState<SelectedNodeInfo | null>(
     null,
@@ -198,6 +198,7 @@ function GraphContent() {
       );
       if (graphNode) {
         setSelectedNode({
+          kgNodeId: graphNode.id,
           title: graphNode.nodeTitle,
           description: graphNode.nodeDescription,
           status: graphNode.status,
@@ -355,6 +356,20 @@ function GraphContent() {
                 <Text variant="small" style={{ color: theme.colors.textMuted }}>
                   {selectedNode.description}
                 </Text>
+              )}
+              {selectedNode.status !== "locked" && (
+                <Button
+                  size="sm"
+                  onClick={() =>
+                    router.push(
+                      `/quiz?kgNode=${selectedNode.kgNodeId}&ue=${userExpertiseId}`,
+                    )
+                  }
+                >
+                  {selectedNode.status === "completed"
+                    ? "Retake Quiz"
+                    : "Take Quiz"}
+                </Button>
               )}
             </Stack>
           </Card>

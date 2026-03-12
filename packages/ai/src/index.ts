@@ -9,3 +9,4 @@ export {
   type GeneratedNode,
   type GeneratedEdge,
 } from "./graph";
+export { generateQuizQuestions } from "./quiz";

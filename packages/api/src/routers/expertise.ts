@@ -1,8 +1,21 @@
 import { z } from "zod";
-import { router, publicProcedure, protectedProcedure, partialProtectedProcedure } from "../server";
+import {
+  router,
+  publicProcedure,
+  protectedProcedure,
+  partialProtectedProcedure,
+} from "../server";
 import { ExpertiseService } from "@lurnt/domain-services";
-import { findActiveUserExpertises } from "@lurnt/data-access";
-import type { UnauthedContext, AuthedContext } from "@lurnt/domain";
+import {
+  findActiveUserExpertises,
+  findUserExpertisesWithTitles,
+} from "@lurnt/data-access";
+import {
+  type UnauthedContext,
+  type AuthedContext,
+  UserExpertiseSchema,
+  ExpertiseSchema,
+} from "@lurnt/domain";
 
 function toUnauthedCtx(ctx: {
   db: { _type: "db"; client: any };
@@ -24,14 +37,21 @@ export const expertiseRouter = router({
       return ExpertiseService.search.execute(toUnauthedCtx(ctx), input);
     }),
 
-  hasActive: partialProtectedProcedure
-    .query(async ({ ctx }) => {
-      const active = await findActiveUserExpertises(
-        { _type: "unauthed", db: ctx.db } as UnauthedContext,
-        ctx.user.userId,
-      );
-      return { hasActive: active.length > 0 };
-    }),
+  hasActive: partialProtectedProcedure.query(async ({ ctx }) => {
+    const active = await findActiveUserExpertises(
+      { _type: "unauthed", db: ctx.db } as UnauthedContext,
+      ctx.user.userId,
+    );
+    return { hasActive: active.length > 0 };
+  }),
+
+  myExpertises: protectedProcedure.query(async ({ ctx }) => {
+    const res = await findUserExpertisesWithTitles(
+      toAuthedCtx(ctx),
+      ctx.user.userId,
+    );
+    return res;
+  }),
 
   choose: protectedProcedure
     .input(

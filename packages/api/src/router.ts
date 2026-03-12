@@ -3,6 +3,7 @@ import { userRouter } from "./routers/user";
 import { expertiseRouter } from "./routers/expertise";
 import { assessmentRouter } from "./routers/assessment";
 import { knowledgeGraphRouter } from "./routers/knowledgeGraph";
+import { nodeQuizRouter } from "./routers/nodeQuiz";
 import { getDb } from "@lurnt/database";
 
 export const appRouter = router({
@@ -10,6 +11,7 @@ export const appRouter = router({
   expertise: expertiseRouter,
   assessment: assessmentRouter,
   knowledgeGraph: knowledgeGraphRouter,
+  nodeQuiz: nodeQuizRouter,
   ping: publicProcedure.query(async () => {
     try {
       await getDb();

@@ -8,3 +8,5 @@ export * from "./edge";
 export * from "./expertiseNode";
 export * from "./knowledgeGraphNode";
 export * from "./knowledgeGraphEdge";
+export * from "./nodeQuiz";
+export * from "./nodeQuizResult";
