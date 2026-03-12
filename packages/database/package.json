@@ -12,6 +12,7 @@
     "db:migrate": "pnpm with-env tsx src/migrate.ts",
     "db:push": "pnpm with-env drizzle-kit push",
     "db:studio": "pnpm with-env drizzle-kit studio",
+    "db:truncate": "pnpm with-env tsx src/truncate.ts",
     "clean": "rm -rf .turbo node_modules dist"
   },
   "dependencies": {
